@@ -27,7 +27,7 @@
                 <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                     @foreach($tasks as $task)
                         <li class="py-4 flex items-center space-x-4">
-                            <div class="flex justify-between content-center min-w-0 w-full">
+                            <div class="flex justify-between content-center items-center min-w-0 w-full">
                                 <div class="flex items-center">
                                     <form action="{{ route('update', $task->id) }}" method="POST">
                                         @csrf
@@ -36,7 +36,7 @@
                                             <i class="fa-solid fa-check "></i>
                                         </button>
                                     </form>
-                                    <p class="text-lg font-medium text-primary truncate">
+                                    <p class="text-lg font-medium text-primary">
                                         {{ $task->content }}
                                     </p>
                                 </div>
