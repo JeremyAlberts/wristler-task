@@ -17,7 +17,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $task = $request->validate([
-            'content' => 'required'
+            'content' => 'required|max:180'
         ]);
 
         Task::create($task);
