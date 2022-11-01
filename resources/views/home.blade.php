@@ -12,7 +12,7 @@
 <body>
 <div class=" container mx-auto p-8">
     <div class="w-full bg-gray rounded-lg shadow-md">
-        <div class="flex justify-between rounded-t-lg items-center bg-primary py-5 px-3">
+        <div class="flex justify-between rounded-t-lg items-center bg-primary py-5 px-4">
 
             <form action="{{ route('store') }}" method="POST" class="flex w-full">
                 @csrf
@@ -28,9 +28,19 @@
                     @foreach($tasks as $task)
                         <li class="py-4 flex items-center space-x-4">
                             <div class="flex justify-between content-center min-w-0 w-full">
-                                <p class="text-lg font-medium text-primary truncate">
-                                    {{ $task->content }}
-                                </p>
+                                <div class="flex items-center">
+                                    <form action="{{ route('update', $task->id) }}" method="POST">
+                                        @csrf
+                                        @method('patch')
+                                        <button type="submit" class="{{ $task->isDone ? "bg-primary text-white border-transparent hover:border-primary hover:bg-white hover:text-primary" : "bg-white text-primary border-priamry hover:border-transparent hover:bg-primary hover:text-white" }} border-2 font-bold px-2 py-1 rounded mr-3">
+                                            <i class="fa-solid fa-check "></i>
+                                        </button>
+                                    </form>
+                                    <p class="text-lg font-medium text-primary truncate">
+                                        {{ $task->content }}
+                                    </p>
+                                </div>
+
                                 <form action="{{ route('destroy', $task->id) }}" method="POST">
                                     @csrf
                                     @method('delete')
@@ -38,13 +48,7 @@
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </form>
-                                <form action="{{ route('update', $task->id) }}" method="POST">
-                                    @csrf
-                                    @method('patch')
-                                    <button type="submit" class="{{ $task->isDone ? "bg-secondary" : "bg-primary" }} hover:bg-secondary text-white font-bold ml-2 py-2 px-6 rounded-full">
-                                        <i class="fa-solid fa-hotel"></i>
-                                    </button>
-                                </form>
+
                             </div>
                         </li>
                     @endforeach
